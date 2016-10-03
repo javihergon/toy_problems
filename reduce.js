@@ -12,6 +12,15 @@
 
 function each(collection, callback) {
   //your code here!
+  if (Array.isArray(collection)){
+    for(var i=0; i<collection.length; i++){
+            callback(collection[i], i);
+    }
+  }else{
+    for(var key in collection){
+            callback(collection[key], key);
+    }
+  }
 }
 
 
@@ -29,9 +38,12 @@ function each(collection, callback) {
 
 function reduce(collection, callback, startValue) {
   //your code here!
+  var acc = startValue;
+        each(collection, function(element){
+              acc = callback(acc, element);
+        });
+  return acc;
 }
-
-
 /* Sum All numbers */
 
 //Create a function sumAllNumbers that takes in a collection and uses reduce to return the
@@ -39,6 +51,9 @@ function reduce(collection, callback, startValue) {
 
 function sumAllNumbers(collection){
   //your code here!
+      return reduce(collection, function(a, b){
+                return (a + b);
+      }, 0)
 }
 
 //examples:
